@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma De IOT (Mongo DB)</title>
+    <!--BOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body">
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <a href="/" class="navbar-brand">Plataforma De IOT (MongoDB)</a>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            
+            <!--FORMULARIO-->
+            <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/add" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="temperatura" placeholder="Temperatura" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" name="humedad" placeholder="Humedad" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="date" name="fecha" placeholder="Fecha" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea name="descripcion"  cols="80" class="form-control" placeholder="Descripcion"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                    </form>
+                </div>
+            </div>
+
+            </div>
+
+            <!--LISTA DE DATOS EN TABLA-->
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Temperatura</th>
+                            <th>Humedad</th>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                       <% for (var i = 0; i < Datos.length; i++){ %>
+                       <tr>
+                           <td> <%= i + 1 %> </td>
+                           <td> <%= Datos[i].temperatura %> </td>
+                           <td> <%= Datos[i].humedad %> </td>
+                           <td> <%= Datos[i].fecha %> </td>
+                           <td> <%= Datos[i].descripcion %> </td>
+                           <td>
+                               <a href="/eliminar/<%= Datos[i]._id %>" class="btn btn-danger">Eliminar</a>
+                               <a href="/editar/<%= Datos[i]._id %>" class="btn btn-info">Editar</a>
+                           </td>
+                       </tr>    
+                       
+                       <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
